@@ -34,6 +34,7 @@ void Person::PrintPersonInfo()
 }
 #endif
 
+#if 0
 class Person
 {
 public:
@@ -56,6 +57,36 @@ void Test()
 	man._gender = "male";
 	man.PrintPersonInfo();
 }
+#endif
+
+class Date
+{
+public:
+	void PrintDate()
+	{
+		cout << _year <<"-"<< _month <<"-"<< _day << endl;
+	}
+	void SetDate(int year, int month, int day)
+	{
+		_year = year;
+		_month = month;
+		_day = day;
+	}
+private:
+	int _year;
+	int _month;
+	int _day;
+};
+
+void Test()
+{
+	Date s1,s2;
+	s1.SetDate(2019, 3, 29);
+	s2.SetDate(2019, 9, 24);
+	s1.PrintDate();
+	s2.PrintDate();
+}
+
 
 int main()
 {
