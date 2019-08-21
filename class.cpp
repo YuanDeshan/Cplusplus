@@ -59,6 +59,31 @@ void Test()
 }
 #endif
 
+#if 0
+#include <iostream>
+using namespace std;
+
+int findNumberOf1(int num){
+	int arr[1024];
+	int count = 0, i;
+	for (i = 0;num/2==0; ++i){
+		arr[i] = num % 2;
+		if (arr[i] == 1)
+			++count;
+	}
+	
+	return count;
+}
+
+int main(){
+	int num;
+	cin >> num;
+	cout << findNumberOf1(num) << endl;
+	return 0;
+}
+#endif
+
+
 class Date
 {
 public:
