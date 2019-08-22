@@ -83,7 +83,7 @@ int main(){
 }
 #endif
 
-
+#if 0
 class Date
 {
 public:
@@ -119,3 +119,34 @@ int main()
 
 	return 0;
 }
+#endif
+
+
+class Date
+{
+public:
+	//无参构造函数
+	Date()
+	{}
+
+	//带参构造函数
+	Date(int year, int month, int day)
+	{
+		_year = year;
+		_month = month;
+		_day = day;
+	}
+
+	//全缺省构造函数
+	Date(int year = 2019, int month = 8, int day = 1)
+	{
+		_year = year;
+		_month = month;
+		_day = day;
+	}
+
+private:
+	int _year;
+	int _month;
+	int _day;
+};
