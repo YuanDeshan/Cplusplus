@@ -150,3 +150,141 @@ private:
 	int _month;
 	int _day;
 };
+
+#if 0
+class String
+{
+public:
+	String(const char* str = "jack")
+	{
+		_str = (char*)malloc(strlen(str) + 1);
+		strcpy(_str, str);
+	}
+	~String()
+	{
+		cout << "~String1()" << endl;
+		free(_str);
+	}
+private:
+	char* _str;
+};
+
+class Person
+{
+public:
+	String _name;
+	int _age;
+};
+int main()
+{
+	Person p;
+	return 0;
+}
+#endif
+
+#if 0
+class Date
+{
+public:
+	Date()
+	{
+		_year = 2019;
+		_month = 5;
+		_day = 20;
+		cout << "Date1" << endl;
+	}
+	//默认拷贝构造函数
+	//1.参数只有一个，用const修饰
+	//2.必须传引用
+	//3.类型：已有类类型
+	Date(const Date& d)
+	{
+		_year = d._year;
+		_month = d._month;
+		_day = d._day;
+		cout << "Date2" << endl;
+	}
+
+private:
+	int _year;
+	int _month;
+	int _day;
+};
+
+void Test()
+{
+	Date d;
+	//拷贝构造
+	Date D(d);
+
+
+}
+int main()
+{
+	Test();
+	return 0;
+}
+#endif
+
+#if 0
+class  Date
+{
+public:
+	Date()
+	{
+		_year = 2019;
+		_month = 3;
+		_day = 29;
+	}
+private:
+	int _year;
+	int _month;
+	int _day;
+};
+
+int main()
+{
+	Date d;
+	//D会自动调用编译器默认生成的拷贝构造函数
+	Date D(d);
+	return 0;
+}
+#endif
+
+class Date{
+public:
+
+	Date(int year=2019,int month=1,int day=1)
+	{
+		_year = year;
+		_month = month;
+		_day = day;
+	}
+
+
+
+	Date& operator=(const Date& d)
+	{
+		if (this != &d)
+		{
+			_year = d._year;
+			_month = d._month;
+			_day = d._day;
+		}
+		return *this;
+	}
+
+private:
+	int _year;
+	int _month;
+	int _day;
+
+};
+ 
+int main(){
+
+	Date d(2019,3,29);
+	Date D;
+	D = d;
+	return 0;
+}
