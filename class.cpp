@@ -1,5 +1,7 @@
+#define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
 using namespace std;
+#include <string>
 
 #if 0
 class  Operate
@@ -60,30 +62,6 @@ void Test()
 #endif
 
 #if 0
-#include <iostream>
-using namespace std;
-
-int findNumberOf1(int num){
-	int arr[1024];
-	int count = 0, i;
-	for (i = 0;num/2==0; ++i){
-		arr[i] = num % 2;
-		if (arr[i] == 1)
-			++count;
-	}
-	
-	return count;
-}
-
-int main(){
-	int num;
-	cin >> num;
-	cout << findNumberOf1(num) << endl;
-	return 0;
-}
-#endif
-
-#if 0
 class Date
 {
 public:
@@ -111,25 +89,17 @@ void Test()
 	s1.PrintDate();
 	s2.PrintDate();
 }
-
-
-int main()
-{
-	Test();
-
-	return 0;
-}
 #endif
 
-
+#if 0
 class Date
 {
 public:
-	//æ— å‚æž„é€ å‡½æ•°
+	//ÎÞ²Î¹¹Ôìº¯Êý
 	Date()
 	{}
 
-	//å¸¦å‚æž„é€ å‡½æ•°
+	//´ø²Î¹¹Ôìº¯Êý
 	Date(int year, int month, int day)
 	{
 		_year = year;
@@ -137,7 +107,7 @@ public:
 		_day = day;
 	}
 
-	//å…¨ç¼ºçœæž„é€ å‡½æ•°
+	//È«È±Ê¡¹¹Ôìº¯Êý
 	Date(int year = 2019, int month = 8, int day = 1)
 	{
 		_year = year;
@@ -150,6 +120,39 @@ private:
 	int _month;
 	int _day;
 };
+#endif
+
+#if 0
+typedef int SLDatatype;
+
+
+class SeqList
+{
+public:
+	SeqList(int capacity = 10)
+	{
+		_pdata = (SLDatatype*)malloc(sizeof(SLDatatype)*capacity);
+		assert(_pdata);
+		_size = 0;
+		_capacity = capacity;
+	}
+	~SeqList()
+	{
+		if (_pdata)
+		{
+			free(_pdata);
+			_pdata = NULL;
+			_size = 0;
+			_capacity = 0;
+		}
+	}
+
+private:
+	int* _pdata;
+	int _capacity;
+	int _size;
+};
+#endif
 
 #if 0
 class String
@@ -193,10 +196,10 @@ public:
 		_day = 20;
 		cout << "Date1" << endl;
 	}
-	//é»˜è®¤æ‹·è´æž„é€ å‡½æ•°
-	//1.å‚æ•°åªæœ‰ä¸€ä¸ªï¼Œç”¨constä¿®é¥°
-	//2.å¿…é¡»ä¼ å¼•ç”¨
-	//3.ç±»åž‹ï¼šå·²æœ‰ç±»ç±»åž‹
+	//Ä¬ÈÏ¿½±´¹¹Ôìº¯Êý
+	//1.²ÎÊýÖ»ÓÐÒ»¸ö£¬ÓÃconstÐÞÊÎ
+	//2.±ØÐë´«ÒýÓÃ
+	//3.ÀàÐÍ£ºÒÑÓÐÀàÀàÐÍ
 	Date(const Date& d)
 	{
 		_year = d._year;
@@ -214,7 +217,7 @@ private:
 void Test()
 {
 	Date d;
-	//æ‹·è´æž„é€ 
+	//¿½±´¹¹Ôì
 	Date D(d);
 
 
@@ -245,12 +248,13 @@ private:
 int main()
 {
 	Date d;
-	//Dä¼šè‡ªåŠ¨è°ƒç”¨ç¼–è¯‘å™¨é»˜è®¤ç”Ÿæˆçš„æ‹·è´æž„é€ å‡½æ•°
+	//D»á×Ô¶¯µ÷ÓÃ±àÒëÆ÷Ä¬ÈÏÉú³ÉµÄ¿½±´¹¹Ôìº¯Êý
 	Date D(d);
 	return 0;
 }
 #endif
 
+#if 0
 class Date{
 public:
 
@@ -286,5 +290,89 @@ int main(){
 	Date d(2019,3,29);
 	Date D;
 	D = d;
+	return 0;
+}
+#endif
+
+#if 0
+class Date
+{
+public:
+	Date()
+	{
+		_year = 2019;
+		_month = 3;
+		_day = 28;
+	}
+	void PrintDate()const
+	{
+		cout << _year << "-" << _month << "-" << _day << endl;
+	}
+	int Add();
+private:
+	int _year;
+	int _month;
+	int _day;
+};
+
+int Date::Add()
+{
+	_day += 1;
+	PrintDate();
+	return _day;
+}
+
+int main()
+{
+	Date d;
+	d.PrintDate();
+	d.Add();
+
+	return 0;
+}
+#endif
+
+#if 0
+class Date
+{
+public:
+	Date* operator&()
+	{
+		return this;
+	}
+	const Date* operator&()const
+	{
+		return this;
+	}
+private:
+	int _year;
+	int _month;
+	int _day;
+};
+#endif
+
+class Date
+{
+public:
+	Date(int year = 2019, int month = 3, int day = 29)
+		:_year(year)
+		, _month(month)
+		, _day(day)	
+	{}
+
+	void PrintDate()
+	{
+		cout << _year << "-" << _month << "-" << _day << endl;
+	}
+private:
+	int _year;
+	int _month;
+	int _day;
+};
+
+int main()
+{
+	Date d;
+	d.PrintDate();
 	return 0;
 }
