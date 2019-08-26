@@ -379,7 +379,7 @@ int main()
 }
 #endif
 
-
+#if 0
 class B
 {
 public:
@@ -412,3 +412,5 @@ int main()
 	a.Print();
 	return 0;
 }
+#endif
+
