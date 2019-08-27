@@ -414,3 +414,65 @@ int main()
 }
 #endif
 
+#if 0
+void Fun()
+{
+	int* ptr1 = new int;
+	int* ptr2 = new int(5);
+	int* ptr3 = new int[5];
+
+	delete ptr1;
+	delete ptr2;
+	delete[] ptr3;
+
+}
+#endif
+
+#if 0
+template<class T>
+T Add(const T& a,const T& b)
+{
+	return a + b;
+}
+
+int main()
+{	
+	int a = 10;
+	int b = 20.0;
+	cout << Add<int>(a, b) << endl;
+	return 0;
+}
+#endif
+
+
+template<class T>
+class Vector
+{
+public:
+	Vector(int capacity = 10)
+		:_array(new T[capacity])
+		, _size(0);
+		, _capacity(capacity)
+	{}
+	~Vector();
+	void PushBack(const T& data);
+	void PopBack();
+	//...
+	int GetSize();
+
+private:
+	T* _array;
+	int _size;
+	int _capacity;
+};
+
+template<class T>
+Vector<T>::~Vector()
+{
+	if (_array)
+	{
+		delete[] _array;
+		_size = _capacity = 0;
+	}
+}
+
