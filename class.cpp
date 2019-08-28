@@ -444,7 +444,7 @@ int main()
 }
 #endif
 
-
+#if 0
 template<class T>
 class Vector
 {
@@ -475,4 +475,5 @@ Vector<T>::~Vector()
 		_size = _capacity = 0;
 	}
 }
+#endif
 
