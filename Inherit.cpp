@@ -26,11 +26,11 @@ public:
 	Student()
 		:_id(2019)
 	{}
-	/*void Print()
+	void Print()
 	{
 		cout << _name << " " << _age <<" "<<_gender << endl;
 		cout << _id << endl;
-	}*/
+	}
 private:
 	int _id;
 };
