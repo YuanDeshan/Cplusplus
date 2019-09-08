@@ -2,6 +2,7 @@
 using namespace std;
 #include <string>
 
+#if 0
 class Person
 {
 public:
@@ -43,3 +44,4 @@ int main()
 	s.Print();
 	return 0;
 }
+#endif
