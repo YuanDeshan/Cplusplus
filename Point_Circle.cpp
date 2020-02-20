@@ -60,17 +60,39 @@ private:
 //判断点和圆的关系
 void Judge(Point &p, Circle &c)
 {
-	if()
+	//两点之间距离的平方
+	int Distance = (c.Getcenter().Getx() - p.Getx())*(c.Getcenter().Getx() - p.Getx())
+		         + (c.Getcenter().Gety() - p.Gety())*(c.Getcenter().Gety() - p.Gety());
+	//半径的平方
+	int rDistance = c.Getr()*c.Getr();
+	//判断关系
+	if (Distance == rDistance)
+	{
+		std::cout << "点在圆上" << std::endl;
+	}
+	else if (Distance > rDistance)
+	{
+		std::cout << "点在圆外" << std::endl;
+	}
+	else
+	{
+		std::cout << "点在圆内" << std::endl;
+	}
 }
 int main()
 {
 	Point p1;
-	p1.Setx(11);
-	p1.Sety(11);
+	p1.Setx(0);
+	p1.Sety(9);
+
+	Point p2;
+	p2.Setx(0);
+	p2.Sety(0);
 
 	Circle c1;
-	c1.Setcenter(p1);
+	c1.Setcenter(p2);
 	c1.Setr(10);
 
+	Judge(p1, c1);
 	return 0;
 }
