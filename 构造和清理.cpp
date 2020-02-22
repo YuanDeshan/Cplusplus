@@ -50,9 +50,11 @@ public:
 	{
 		_age = p._age;
 		std::cout << "拷贝构造函数" << std::endl;
-
 	}
-
+	~Person()
+	{
+		std::cout << "析构函数" << std::endl;
+	}
 private:
 	int _age;
 };
@@ -92,6 +94,33 @@ void test3()
 	Person p1 = 10;//相当于Person p1=Person(10);  有参构造
 	Person p2 = p;//相当于Person p2=Person(p);  拷贝构造
 }
+//拷贝构造函数调用时机
+//1.使用一个已创建的对象来初始化另一个对象
+void test4()
+{
+	Person p(10);
+	Person p1(p);
+}
+//2.值传递的方式给函数传参
+void dowork(Person p)
+{
+	std::cout << "值传递" << std::endl;
+}
+void test5()
+{
+	Person p;
+	dowork(p);
+}
+//3.值方式返回局部对象
+Person dowork1()
+{
+	Person p;
+	return p;
+}
+void test6()
+{
+	Person p1 = dowork1();
+};
 int main()
 {
 
@@ -99,6 +128,8 @@ int main()
 	//test0();
 	//test1();
 	//test2();
-	test3();
+	//test3();
+	//test4();
+	test5();
 	return 0;
 }
