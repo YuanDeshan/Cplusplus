@@ -1,3 +1,4 @@
+#if 0
 #include <iostream>
 
 class Test
@@ -24,3 +25,4 @@ int main()
 	std::cout << t._a<<" " << t._b << " " <<t._c << std::endl;
 	return 0;
 }
+#endif
