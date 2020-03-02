@@ -5,19 +5,28 @@ class Person
 public:
 
 	//1.+号运算符重载
-	Person operator+(Person &p)
-	{
-		Person temp;
-		temp._A = this->_A + p._A;
-		temp._B = this->_B + p._B;
-		return temp;
-	}
+	//方式一:成员函数重载
+	//Person operator+(Person &p)
+	//{
+	//	Person temp;
+	//	temp._A = this->_A + p._A;
+	//	temp._B = this->_B + p._B;
+	//	return temp;
+	//}
 
 public:
 	int _A;
 	int _B;
 };
 
+//方式二:全局函数重载
+Person operator+(Person &p1, Person &p2)
+{
+	Person temp;
+	temp._A = p1._A + p2._A;
+	temp._B = p1._B + p2._B;
+	return temp;
+}
 void test1()
 {
 	Person p1;
