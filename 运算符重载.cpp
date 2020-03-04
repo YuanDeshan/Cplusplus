@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string>
 
 //1.+号运算符重载
 #if 0
@@ -129,6 +130,9 @@ void test3()
 
 }
 #endif
+
+#if 0
+//4 =号运算符重载
 class Person
 {
 public:
@@ -177,11 +181,73 @@ void test4()
 	std::cout << *p2._page << std::endl;
 	std::cout << *p3._page << std::endl;
 }
+#endif
+
+#if 0
+//5.重载关系运算符
+class Person
+{
+public:
+	Person(std::string name, int age)
+	{
+		_name = name;
+		_age = age;
+	}
+	//其它运算符类似
+	bool operator==(Person &p)
+	{
+		if (this->_name == p._name&&this->_age == p._age)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	
+public:
+	std::string _name;
+	int _age;
+};
+
+void test5()
+{
+	Person p1("san", 18);
+	Person p2("san", 18);
+	if (p1 == p2)
+	{
+		std::cout << "p1和p2是相等的" << std::endl;
+	}
+}
+#endif 
+
+//重载函数调用()
+class MyPrint
+{
+public:
+	void operator()(std::string str)
+	{
+		std::cout << str << std::endl;
+	}
+};
+
+void test6()
+{
+	MyPrint m;
+	m("hehe");
+	MyPrint()("haha");
+	//MyPrint为匿名函数对象,MyPrint为匿名对象,当前行执行结束后,便会销毁
+
+
+}
 int main()
 {
 	//test1();
 	//test2();
 	//test3();
-	test4();
+	//test4();
+	//test5();
+	test6();
 	return 0;
 }
