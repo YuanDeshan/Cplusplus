@@ -84,7 +84,7 @@ void test2()
 }
 #endif
 
-#if 1
+#if 0
 //3.++运算符重载
 class MyInt
 {
@@ -128,11 +128,60 @@ void test3()
 	std::cout << M << std::endl;
 
 }
+#endif
+class Person
+{
+public:
+	Person(int age)
+	{
+		_page = new int(age);
+	}
+
+
+	Person& operator=(Person &p)
+	{
+		//判断对象是否有属性在堆区,有的话要进行释放
+		if (_page != NULL)
+		{
+			delete _page;
+			_page = NULL;
+		}
+		_page = new int(*p._page);
+		//若要连续赋值,需要返回对象本身,返回值类型为Person&
+		return *this;
+
+	}
+	~Person()
+	{
+		if (_page != NULL)
+		{
+			delete _page;
+			_page = NULL;
+		}
+	}
+
+public:
+	int  *_page;
+};
+
+void test4()
+{
+	Person p1(18);
+	Person p2(20);
+	//p1 = p2;//这种赋值为浅拷贝,p1和p2的数据在同一块内存
+			//当两者都调用析构函数时,会重复释放同一块内存空间
+			//因此,要采用深拷贝的方式解决,在这里重载=运算符
+	Person p3(0);
+	p3 = p2 = p1;
+	std::cout << *p1._page << std::endl;
+	std::cout << *p2._page << std::endl;
+	std::cout << *p3._page << std::endl;
+}
 int main()
 {
 	//test1();
 	//test2();
-	test3();
+	//test3();
+	test4();
 	return 0;
 }
-#endif
