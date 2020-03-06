@@ -107,6 +107,7 @@ void test2()
 }
 #endif
 
+#if 0
 //继承中子类和父类的构造和析构顺序
 class Base
 {
@@ -140,11 +141,56 @@ void test3()
 {
 	Drive d;
 }
+#endif
+
+//同名成员处理
+class Base
+{
+public:
+	void func()
+	{
+		std::cout << "Base::func()调用" << std::endl;
+	}
+
+	void func(int b)
+	{
+		std::cout << "Base::func(int b)调用" << std::endl;
+	}
+	int _a;
+
+};
+
+class Drive:public Base
+{
+public:
+	void func()
+	{
+		std::cout << "Drive::func()调用" << std::endl;
+	}
+
+	int _a;
+};
+
+void test4()
+{
+	Drive d;
+	d.func();
+	//当需要访问父类同名成员时,需要加上函数调用前作用域
+	d.Base::func();
+	d.Base::_a;
+
+	//子类同名成员会隐藏父类中所有同名函数,包括函数重载
+	//访问父类中同名并且被重载的函数,同样需要加作用域
+	//同名静态成员函数也是同样的处理方式
+	d.Base::func(10);
+}
+
 
 int main()
 {
 	//test1();
 	//test2();
-	test3();
+	//test3();
+	test4();
 	return 0;
 }
