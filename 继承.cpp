@@ -143,6 +143,7 @@ void test3()
 }
 #endif
 
+#if 0
 //同名成员处理
 class Base
 {
@@ -184,13 +185,60 @@ void test4()
 	//同名静态成员函数也是同样的处理方式
 	d.Base::func(10);
 }
+#endif
 
+//多继承中 当父类含有相同名称的成员在调用时需要加作用域
+class Base1
+{
+public:
+	Base1()
+	{
+		_a = 10;
+	}
+public:
+	int _a;
+
+};
+
+class Base2
+{
+public:
+	Base2()
+	{
+		_a = 10;
+		_b = 20;
+	}
+public:
+	int _a;
+	int _b;
+
+};
+
+class Drive:public Base1,public Base2
+{
+public:
+	Drive()
+	{
+		_c = 30;
+	}
+public:
+	int _c;
+
+};
+
+void test5()
+{
+	Drive d;
+	std::cout <<d.Base1::_a << std::endl;
+	std::cout << d.Base2::_a << std::endl;
+}
 
 int main()
 {
 	//test1();
 	//test2();
 	//test3();
-	test4();
+	//test4();
+	test5();
 	return 0;
 }
