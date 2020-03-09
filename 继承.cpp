@@ -187,6 +187,7 @@ void test4()
 }
 #endif
 
+#if 0
 //多继承中 当父类含有相同名称的成员在调用时需要加作用域
 class Base1
 {
@@ -232,13 +233,55 @@ void test5()
 	std::cout <<d.Base1::_a << std::endl;
 	std::cout << d.Base2::_a << std::endl;
 }
+#endif
 
+class Animals
+{
+public:
+	int _age;
+};
+
+//虚继承:在要继承的类加上virtual就可以变为虚继承
+class Sheep:virtual public Animals
+{
+public:
+	Sheep()
+	{
+		_age = 10;
+	}
+};
+
+class Tuo:virtual public Animals
+{
+public:
+	Tuo()
+	{
+		_age = 20;
+	}
+};
+
+
+class SheepTuo:public Sheep,public Tuo
+{
+	
+};
+
+void test6()
+{
+	SheepTuo st;
+	//这样就出现了菱形继承,SheepTuo中的_age继承了Sheep和Tuo,一共有两份
+	//编译器无法判断使用的是哪一份,虽然可以加作用域进行区分,但会导致代码冗余
+	//因此采用虚继承的方式解决
+	std::cout << st._age << std::endl;
+
+}
 int main()
 {
 	//test1();
 	//test2();
 	//test3();
 	//test4();
-	test5();
+	//test5();
+	test6();
 	return 0;
 }
