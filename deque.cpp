@@ -1,4 +1,5 @@
 #include <iostream>
+#include <algorithm>
 #include <deque>
 using std::cout;
 using std::endl;
@@ -59,9 +60,98 @@ void test02()
 
 }
 
+//deque大小操作
+void test03()
+{
+	deque<int> d1;
+	for (int i = 0; i < 5; ++i)
+	{
+		d1.push_back(i);
+	}
+	Printdeque(d1);
+
+	if (d1.empty())
+	{
+		cout << "deque容器为空" << endl;
+	}
+	else
+	{
+		cout << "deque容器不为空" << endl;
+	}
+
+	cout << "deque大小:" << d1.size() << endl;
+
+	//d1.resize(10);
+	d1.resize(10, 5);
+	Printdeque(d1);
+}
+
+//deque插入和删除
+void test04()
+{
+	deque<int> d1;
+	//尾插
+	d1.push_back(10);
+	d1.push_back(20);
+	Printdeque(d1);
+	//头插
+	d1.push_front(30);
+	d1.push_front(40);
+	Printdeque(d1);
+	//尾删
+	d1.pop_back();
+	//头删
+	d1.pop_front();
+	Printdeque(d1);
+
+	//insert插入
+	d1.insert(d1.begin(), 999);
+	Printdeque(d1);
+
+	d1.insert(d1.begin(),3, 999);
+	Printdeque(d1);
+
+	deque<int>::iterator it = d1.begin();
+	d1.erase(it);
+	Printdeque(d1);
+
+	d1.clear();
+	Printdeque(d1);
+
+}
+
+//deque存取操作
+//at(int idx); 返回索引dex所指向的数据
+//operator[]; 返回索引dex所指向的数据
+//front(); 返回容器中第一个元素
+//back(); 返回容器中最后一个元素
+
+//deque容器排序
+void test05()
+{
+	deque<int> d;
+	d.push_back(4);
+	d.push_front(5);
+	d.push_back(7);
+	d.push_back(2);
+	d.push_back(9);
+	d.push_front(1);
+	d.push_front(3);
+	d.push_front(6);
+	d.push_front(8);
+	Printdeque(d);
+
+	//sort排序  默认从小到大
+	sort(d.begin(), d.end());
+	Printdeque(d);
+}
+
 int main()
 {
 	//test01();
-	test02();
+	//test02();
+	//test03();
+	//test04();
+	test05();
 	return 0;
 }
