@@ -82,10 +82,110 @@ void test03()
 	PrintList(L2);
 }
 
+
+//list大小操作
+void test04()
+{
+	list<int> L1;
+	L1.push_back(1);
+	L1.push_back(2);
+	L1.push_back(3);
+	L1.push_back(4);
+	L1.push_back(5);
+
+	if (L1.empty())
+	{
+		cout << "L1为空" << endl;
+	}
+	else
+	{
+		cout << "L1不为空" << endl;
+		cout << "L1的大小为:" <<L1.size()<< endl;
+	}
+
+	//重新指定大小
+	L1.resize(6, 999);//超出的部分用999填充
+	PrintList(L1);
+
+	L1.resize(3);
+	PrintList(L1);
+}
+
+//list插入和删除
+//push_back();  pop_back();  push_front();  pop_front();
+//insert(pos, val); 
+//erase(pos);
+//remove(val);  删掉所有值为val的元素
+void test05()
+{
+	list<int> L1;
+	L1.push_back(1);
+	L1.push_back(2);
+	L1.push_back(1);
+	L1.push_back(1);
+	L1.push_back(3);
+	PrintList(L1);
+
+	L1.remove(1);
+	PrintList(L1);
+
+	L1.clear();
+	PrintList(L1);
+}
+
+//list数据存取
+void test06()
+{
+	list<int> L1;
+	L1.push_back(1);
+	L1.push_back(2);
+	L1.push_front(3);
+	L1.push_front(4);
+	PrintList(L1);
+
+	cout << L1.front() << endl;
+	cout << L1.back() << endl;
+
+	//迭代器不支持随机访问
+}
+
+bool MyCompare(int v1, int v2)
+{
+	return v1 > v2;
+}
+
+//list反转和排序
+void test07()
+{
+	list<int> L1;
+	L1.push_back(3);
+	L1.push_back(1);
+	L1.push_back(5);
+	L1.push_back(4);
+	L1.push_back(2);
+	PrintList(L1);
+
+	L1.reverse();
+	PrintList(L1);
+
+	//默认升序
+	L1.sort();
+	PrintList(L1);
+	//降序
+	L1.sort(MyCompare);
+	PrintList(L1);
+
+	
+}
+
 int main()
 {
 	//test01();
 	//test02();
-	test03();
+	//test03();
+	//test04();
+	//test05();
+	//test06();
+	test07();
 	return 0;
 }
