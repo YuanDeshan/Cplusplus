@@ -77,10 +77,62 @@ void test02()
 	PrintSet(s2);
 }
 
+//set插入和删除
+void test03()
+{
+	set<int> s1;
+	s1.insert(2);
+	s1.insert(3);
+	s1.insert(1);
+	s1.insert(5);
+	s1.insert(2);
+	PrintSet(s1);
+
+	//删除迭代器所指的位置,返回下一个元素迭代器
+	s1.erase(s1.begin());
+	PrintSet(s1);
+
+	//erase(beg,end) //删除beg-end区间的值,返回下一个元素迭代器
+	//删除值为5的元素
+	s1.erase(5);
+	PrintSet(s1);
+
+	//清空容器
+	s1.clear();
+	PrintSet(s1);
+}
+
+//set查找和统计
+void test04()
+{
+	set<int> s1;
+	s1.insert(10);
+	s1.insert(20);
+	s1.insert(30);
+	s1.insert(40);
+	PrintSet(s1);
+
+	set<int>::iterator pos = s1.find(40);
+	if (pos!= s1.end())
+	{
+		cout << "找到元素了" <<*pos<< endl;
+	}
+	else
+	{
+		cout << "未找到元素" << endl;
+	}
+
+	int num = s1.count(20);
+	cout << num << endl;
+
+
+}
 
 int main()
 {
 	//test01();
-	test02();
+	//test02();
+	//test03();
+	test04();
 	return 0;
 }
