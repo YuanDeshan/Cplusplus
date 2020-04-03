@@ -1,13 +1,13 @@
 #include <iostream>
 #include <set>
+#include <string>
+using std::string;
 using std::cout;
 using std::endl;
 using std::set;
-
-//set和multiset
-//二者插入重复的值,都会自动排序
-//set不可插入重复的值
-//multiset可插入重复的值
+using std::multiset;
+using std::pair;  //对组
+using std::make_pair;
 
 void PrintSet(const set<int>& s)
 {
@@ -128,11 +128,148 @@ void test04()
 
 }
 
+
+void PrintMultiset(const multiset<int>& s)
+{
+	for (multiset<int>::const_iterator it = s.begin(); it != s.end(); ++it)
+	{
+		cout << *it << " ";
+	}
+	cout << endl;
+}
+
+//set和multiset
+//二者插入重复的值,都会自动排序
+//set不可插入重复的值,插入时会返回插入的结果,表示插入是否成功
+//multiset可插入重复的值,插入时不会检测,所以可以插入重复数据
+void test05()
+{
+	set<int> s;
+
+	pair < set<int>::iterator, bool > ret = s.insert(10);
+	if (ret.second)
+	{
+		cout << "插入成功" << endl;
+	}
+	else
+	{
+		cout << "插入失败" << endl;
+	}
+
+	s.insert(10);
+	if (ret.second)
+	{
+		cout << "插入成功" << endl;
+	}
+	else
+	{
+		cout << "插入失败" << endl;
+	}
+	PrintSet(s);
+
+	multiset<int> ms;
+	ms.insert(10);
+	ms.insert(10);
+	PrintMultiset(ms);
+}
+
+//pair对组的使用
+void test06()
+{
+	pair<string, int> p1("Tom", 10);
+	cout << p1.first << "  " << p1.second << endl;
+	
+	pair<string, int> p2 = make_pair("Jerry", 20);
+	cout << p2.first << "  " << p2.second << endl;
+
+}
+
+class Mycompare
+{
+public:
+	bool operator()(int v1,int v2)
+	{
+		return v1 > v2;
+	}
+};
+
+//内置类型指定排序规则
+//利用仿函数
+void test07()
+{
+	set<int> s1;
+	s1.insert(10);
+	s1.insert(50);
+	s1.insert(30);
+	s1.insert(20);
+	s1.insert(40);
+	PrintSet(s1);
+
+	set<int, Mycompare> s2;
+	s2.insert(10);
+	s2.insert(50);
+	s2.insert(30);
+	s2.insert(20);
+	s2.insert(40);
+	for (set<int, Mycompare>::iterator it = s2.begin(); it != s2.end(); ++it)
+	{
+		cout << *it << " ";
+	}
+	cout << endl;
+}
+
+//自定义类型数据指定排序规则
+class Person
+{
+public:
+	Person(string name, int age)
+	{
+		this->_name = name;
+		this->_age = age;
+	}
+
+public:
+	string _name;
+	int _age;
+};
+
+class ComparePerson
+{
+public:
+	bool operator ()(const Person& p1, const Person& p2)
+	{
+		return p1._age > p2._age;
+	}
+};
+
+void test08()
+{
+	set<Person, ComparePerson> s;
+	Person p1("唐僧", 20);
+	Person p2("孙悟空", 550);
+	Person p3("猪悟能", 530);
+	Person p4("沙悟净", 200);
+
+	s.insert(p1);
+	s.insert(p2);
+	s.insert(p3);
+	s.insert(p4);
+
+	for (set<Person, ComparePerson>::iterator it = s.begin(); it != s.end(); ++it)
+	{
+		cout << it->_name << "  " << it->_age << endl;
+	}
+}
+
 int main()
 {
 	//test01();
 	//test02();
 	//test03();
-	test04();
+	//test04();
+	//test05();
+	//test06();
+	//test07();
+	test08();
 	return 0;
 }
